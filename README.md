@@ -4,28 +4,6 @@
 
   A personal Blog application built using Django (Python) and PostgreSQL. Admin users create Blog posts and site visitors can view posts, comment on posts, & save posts to read later.  PostgreSQL used for database storage. Deployed using AWS' Elastic Beanstalk.
 
-  ### App Screenshots
-
-  ## Home Page
-
-  ![Home Page](./blog/static/blog/images/screenshot1.png)
-
-  ## All Posts Page
-
-  ![All Posts Page](./blog/static/blog/images/screenshot2.png)
-
-  ## Single Posts Page
-
-  ![Single Post Page](./blog/static/blog/images/screenshot3.png)
-
-  
-  ## Comment on Individual Post
-
-  ![Comment on Individual Post](./blog/static/blog/images/screenshot4.png)
-
-  ## Saved Posts Page
-
-  ![Saved Posts Page](./blog/static/blog/images/screenshot5.png)
   
   ## Table of Contents
   
@@ -44,9 +22,7 @@
   
   Visit deployed URL, view posts, comment on individual posts, or save individual posts to read later.
 
-  ## License
-This application is covered under the MIT License.
-<br>For more information: https://opensource.org/licenses/MIT
+
   
   ## Contributing
   N/A
