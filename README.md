@@ -24,10 +24,22 @@
 
 
 
+```
+3. Deploy on Azure VM:
+	● Azure VM Setup:
+		● Create and configure an Ubuntu-based Azure VM.
+		● Install Docker and Docker Compose on the Azure VM.
+	● Deployment:
+		● Deploy the Dockerized Django application to the Azure VM
+		using Docker Compose.
+		● Set up Nginx as a reverse proxy for the Django application,
+		handling both HTTP and HTTPS traffic.
+		● Ensure that the application is accessible via a domain name.
+```
 
-To set up both HTTP and HTTPS for your Dockerized Nginx serving a Django application, you'll need to generate self-signed SSL certificates if you don't have certificates from a Certificate Authority. Here’s a step-by-step guide to achieve this setup:
+###To set up both HTTP and HTTPS for your Dockerized Nginx serving a Django application, you'll need to generate self-signed SSL certificates if you don't have certificates from a Certificate Authority. Here’s a step-by-step guide to achieve this setup:
 
-Prerequisites
+###Prerequisites
 Docker and Docker Compose installed on your machine.
 Nginx configured as a reverse proxy.
 Django application ready to be served.
