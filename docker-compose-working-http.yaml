@@ -24,7 +24,7 @@ services:
       gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application
       "
     volumes:
-      - ./webapp:/app
+      - .:/app
     depends_on:
       db:
         condition: service_healthy
@@ -40,10 +40,14 @@ services:
       DJANGO_SUPERUSER_PASSWORD: Admin@123
 
   nginx:
-    build: ./nginx
+    image: nginx:latest
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./staticfiles:/app/staticfiles
+      - ./uploads:/app/uploads
     depends_on:
       - web
 
