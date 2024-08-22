@@ -8,9 +8,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     ALTER ROLE dbadminuser SET default_transaction_isolation TO 'read committed';
     ALTER ROLE dbadminuser SET timezone TO 'UTC';
     GRANT ALL PRIVILEGES ON DATABASE blogdb TO dbadminuser;
-EOSQL
-
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "blogdb" <<-EOSQL
+    \c blogdb
     GRANT ALL PRIVILEGES ON SCHEMA public TO dbadminuser;
 EOSQL
 

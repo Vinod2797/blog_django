@@ -11,6 +11,9 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
 EOSQL
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "blogdb" <<-EOSQL
-    GRANT ALL PRIVILEGES ON SCHEMA public TO dbadminuser;
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO dbadminuser;
+    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO dbadminuser;
+    GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO dbadminuser;
+    ALTER SCHEMA public OWNER TO dbadminuser;
 EOSQL
 

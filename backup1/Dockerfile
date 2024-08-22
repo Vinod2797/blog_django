@@ -25,5 +25,5 @@ RUN chmod +x /app/wait-for-it.sh
 EXPOSE 8000
 
 # Run the application
-CMD ["sh", "-c", "./wait-for-it.sh db 5432 -- gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application"]
+CMD ["sh", "-c", "./wait-for-it.sh db:5432 -- gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application"]
 
