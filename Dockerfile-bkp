@@ -8,9 +8,6 @@ ENV PYTHONUNBUFFERED 1
 # Set the working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
-
 # Copy the requirements file
 COPY requirements.txt /app/
 
@@ -28,5 +25,5 @@ RUN chmod +x /app/wait-for-it.sh
 EXPOSE 8000
 
 # Run the application
-CMD ["sh", "-c", "./wait-for-it.sh db:5432 -- gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application"]
+CMD ["sh", "-c", "./wait-for-it.sh db 5432 -- gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application"]
 

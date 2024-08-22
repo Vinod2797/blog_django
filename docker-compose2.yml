@@ -20,7 +20,9 @@ services:
     build: .
     command: >
       sh -c "
+      ./wait-for-it.sh db:5432 -- 
       python manage.py migrate &&
+      python manage.py createsu &&
       gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application
       "
     volumes:
@@ -34,7 +36,7 @@ services:
       DATABASE_PASSWORD: myP@ssw0rd
       DATABASE_HOST: db
       DATABASE_PORT: 5432
-      ALLOWED_HOSTS: '*'
+      ALLOWED_HOSTS: 20.193.158.152
       DJANGO_SUPERUSER_USERNAME: admin
       DJANGO_SUPERUSER_EMAIL: admin@gmail.com
       DJANGO_SUPERUSER_PASSWORD: Admin@123

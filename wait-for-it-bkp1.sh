@@ -5,8 +5,10 @@
 set -e
 
 host="$1"
-port="$2"
-cmd="${@:3}"
+shift
+port="$1"
+shift
+cmd="$@"
 
 until nc -z "$host" "$port"; do
   >&2 echo "Waiting for $host:$port to be available..."
