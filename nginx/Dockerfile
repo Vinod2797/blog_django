@@ -1,19 +1,24 @@
-# Use the official Nginx image as a parent image
+# Use the official Nginx image as a base
 FROM nginx:latest
 
-# Set the working directory
-WORKDIR /etc/nginx
+# Install Certbot and dependencies from Debian/Ubuntu repositories
+RUN apt-get update && \
+    apt-get install -y certbot python3-certbot-nginx && \
+    apt-get clean
 
-# Generate SSL certificates
-RUN mkdir -p /etc/nginx/certs && \
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/nginx/certs/nginx-selfsigned.key \
-    -out /etc/nginx/certs/nginx-selfsigned.crt \
-    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com"
+# Copy the Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy the Certbot initialization script
+COPY certbot-init.sh /certbot-init.sh
+RUN chmod +x /certbot-init.sh
 
-# Expose ports
+# Prepare webroot directory for Certbot
+RUN mkdir -p /var/www/certbot
+
+# Expose ports for HTTP and HTTPS
 EXPOSE 80 443
+
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
 
