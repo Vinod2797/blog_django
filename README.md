@@ -43,11 +43,12 @@
 Docker and Docker Compose installed on your machine.
 Nginx configured as a reverse proxy.
 Django application ready to be served.
+
 Step 1: Generate Self-Signed SSL Certificates
 First, you need to create SSL certificates to use for HTTPS:
 
-mkdir -p certs
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/nginx-selfsigned.key -out ./certs/nginx-selfsigned.crt
+```mkdir -p certs
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/nginx-selfsigned.key -out ./certs/nginx-selfsigned.crt```
 
 You will be prompted to enter details for the certificate. For local testing, you can fill these out arbitrarily.
 
@@ -58,6 +59,7 @@ nginx.conf should point to the correct paths for ssl_certificate and ssl_certifi
 Step 3: Set Up Docker Compose
 Configure your docker-compose.yml to mount the Nginx configuration and the certificates:
 
+```
 version: '3.8'
 
 services:
@@ -86,11 +88,11 @@ services:
       - ./certs:/etc/nginx/certs
     depends_on:
       - web
-
+```
 Step 4: Start Your Application
 Navigate to the directory containing your docker-compose.yml and run:
 
-docker-compose up -d
+```docker-compose up --build -d```
 
 This command builds the images if necessary, starts the containers in detached mode, and ensures they are up and running.
 
