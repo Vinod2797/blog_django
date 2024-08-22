@@ -47,8 +47,10 @@ Django application ready to be served.
 Step 1: Generate Self-Signed SSL Certificates
 First, you need to create SSL certificates to use for HTTPS:
 
-```mkdir -p certs
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/nginx-selfsigned.key -out ./certs/nginx-selfsigned.crt```
+```
+mkdir -p certs
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/nginx-selfsigned.key -out ./certs/nginx-selfsigned.crt
+```
 
 You will be prompted to enter details for the certificate. For local testing, you can fill these out arbitrarily.
 
