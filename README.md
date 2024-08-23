@@ -384,6 +384,44 @@ The -k or --insecure flag with curl is used to bypass SSL verification, which is
 we tried less encrypt but we don't have any DNS domain names. So, here logs for
 ### LOGS ####
 
+```
+root@myweb:~/blog_django# docker-compose ps
+       Name                      Command                  State        Ports
+------------------------------------------------------------------------------
+blog_django_db_1      docker-entrypoint.sh postgres    Up (healthy)   5432/tcp
+blog_django_nginx_1   /bin/bash -c /certbot-init ...   Exit 1
+blog_django_web_1     sh -c  python manage.py mi ...   Up             8000/tcp
+root@myweb:~/blog_django#
+root@myweb:~/blog_django#
+root@myweb:~/blog_django# docker-compose logs nginx
+Attaching to blog_django_nginx_1
+nginx_1  | Saving debug log to /var/log/letsencrypt/letsencrypt.log
+nginx_1  | Requesting a certificate for absolutetechsol.com and www.absolutetechsol.com
+nginx_1  |
+nginx_1  | Certbot failed to authenticate some domains (authenticator: webroot). The Certificate Authority reported these problems:
+nginx_1  |   Domain: absolutetechsol.com
+nginx_1  |   Type:   connection
+nginx_1  |   Detail: 20.193.158.152: Fetching http://absolutetechsol.com/.well-known/acme-challenge/gQHMS3N_KklMW7mxiSE3aeQyvy0IovAysgcCbo_vsac: Connection refused
+nginx_1  |
+nginx_1  |   Domain: www.absolutetechsol.com
+nginx_1  |   Type:   connection
+nginx_1  |   Detail: 20.193.158.152: Fetching http://www.absolutetechsol.com/.well-known/acme-challenge/odAKID0HRupa2mVLkPaVWf923Zp4Rahrzb39k6KQLfk: Connection refused
+nginx_1  |
+nginx_1  | Hint: The Certificate Authority failed to download the temporary challenge files created by Certbot. Ensure that the listed domains serve their content from the provided --webroot-path/-w and that files created there can be downloaded from the internet.
+nginx_1  |
+nginx_1  | Some challenges have failed.
+nginx_1  | Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /var/log/letsencrypt/letsencrypt.log or re-run Certbot with -v for more details.
+nginx_1  | sed: cannot rename /etc/nginx/conf.d/sedWkstaU: Device or resource busy
+nginx_1  | sed: cannot rename /etc/nginx/conf.d/sed0VWvYT: Device or resource busy
+nginx_1  | 2024/08/22 21:53:43 [emerg] 11#11: cannot load certificate "/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem, r) error:10000080:BIO routines::no such file)
+nginx_1  | nginx: [emerg] cannot load certificate "/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem, r) error:10000080:BIO routines::no such file)
+nginx_1  | 2024/08/22 21:53:43 [emerg] 13#13: cannot load certificate "/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem, r) error:10000080:BIO routines::no such file)
+nginx_1  | nginx: [emerg] cannot load certificate "/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/letsencrypt/live/absolutetechsol.com/fullchain.pem, r) error:10000080:BIO routines::no such file)
+root@myweb:~/blog_django#
+root@myweb:~/blog_django#
+
+```
+
 
 ## 	● Security Hardening:
 		● Implement security best practices for Nginx and Django (e.g.,
