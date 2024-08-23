@@ -592,7 +592,7 @@ Backup Script (backup.sh):
 #!/bin/bash
 
 # Database credentials
-DB_NAME="mydatabase"
+DB_NAME="blogdb"
 DB_USER="postgres"
 BACKUP_DIR="/home/user1"
 DATE=$(date +\%Y-\%m-\%d_\%H\%M\%S)
