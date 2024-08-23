@@ -43,6 +43,7 @@ sudo systemctl enable docker
 sudo usermod -aG docker $USER
 sudo apt install docker-compose
 ```
+
 ## 1.2 Create a Django Project:
 
 Initialize a Django project with a basic app:
@@ -55,9 +56,11 @@ pip install django psycopg2-binary
 django-admin startproject myproject .
 cd myproject
 django-admin startapp blog
+```
 
 Configure the project to use PostgreSQL as the database: Edit myproject/settings.py:
 
+```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -68,9 +71,10 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+```
 
-2. Containerize the Application
-2.1 Dockerize Django Application:
+# 2. Containerize the Application
+## 2.1 Dockerize Django Application:
 
 Write a Dockerfile: Create a Dockerfile in the root of your project:
 ```
@@ -129,11 +133,12 @@ volumes:
 
 Ensure that the application can be started with a single command:
 
-docker-compose up
+```docker-compose up```
 
-2.2 Database Configuration:
+## 2.2 Database Configuration:
 
 Ensure that the Django application connects to the PostgreSQL container using environment variables: Edit myproject/settings.py to use environment variables:
+```
 import os
 import dj_database_url
 
@@ -141,7 +146,9 @@ DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 ```
-3. Deploy on Azure VM:
+
+
+# 3. Deploy on Azure VM:
 	● Azure VM Setup:
 		● Create and configure an Ubuntu-based Azure VM.
 		● Install Docker and Docker Compose on the Azure VM.
