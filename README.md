@@ -621,7 +621,7 @@ pg_restore -U postgres -d blogdb -v /home/user1/backup/blogdb.backup
 
 ```
 
-# For Reference logs url:
+### Reference for pg-backup and restore logs:
 ```
 https://github.com/Vinod2797/blog_django/blob/main/pg%20backup%20and%20restore
 
