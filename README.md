@@ -618,4 +618,11 @@ echo "Backup for $DB_NAME completed on $DATE" >> /home/user1/backup.log
 Use the pg_restore utility to restore the backup:
 ```
 pg_restore -U postgres -d blogdb -v /home/user1/backup/blogdb.backup
+
+```
+
+# For Reference logs url:
+```
+https://github.com/Vinod2797/blog_django/blob/main/pg%20backup%20and%20restore
+
 ```
