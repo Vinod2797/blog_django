@@ -569,7 +569,53 @@ pipeline {
    		● Restore Process:
 			● Document and test the process to restore the database from a backup.
 
- ### In Progress...
 
+# 7. Backup and Restore for PostgreSQL
+## 7.1 Database Backup Strategy
+We can use tools like pg_dump. Below is a guide to setting up a backup strategy.
+Using pg_dump for Backup:
 
+Full Database Backup:
 
+pg_dump is a utility that allows you to dump a PostgreSQL database into a script file or other archive file. It is ideal for taking a full backup of your database.
+Example command to backup a database named blogdb:
+```
+pg_dump -U postgres -F c -b -v -f /home/user1/blogdb.backup blogdb
+```
+
+## 7.2 Automating Daily Backups
+To automate daily backups using pg_dump, you can create a simple shell script and schedule it using cron on a Linux server or Task Scheduler on Windows.
+
+Backup Script (backup.sh):
+
+```
+#!/bin/bash
+
+# Database credentials
+DB_NAME="mydatabase"
+DB_USER="postgres"
+BACKUP_DIR="/home/user1"
+DATE=$(date +\%Y-\%m-\%d_\%H\%M\%S)
+
+# Backup file name
+BACKUP_FILE="$BACKUP_DIR/$DB_NAME-$DATE.backup"
+
+# Create backup
+pg_dump -U $DB_USER -F c -b -v -f $BACKUP_FILE $DB_NAME
+
+# Upload to cloud storage (Ex: Azure Blob Storage)
+# az storage blob upload --container-name blogdb-container --file $BACKUP_FILE --name $DB_NAME-$DATE.backup
+
+# Delete old backups (older than 7 days)
+find $BACKUP_DIR -type f -name "*.backup" -mtime +7 -exec rm {} \;
+
+# Logging
+echo "Backup for $DB_NAME completed on $DATE" >> /home/user1/backup.log
+```
+
+## Restore the database:
+
+Use the pg_restore utility to restore the backup:
+```
+pg_restore -U postgres -d mydatabase -v /path/to/backup/mydatabase.backup
+```
