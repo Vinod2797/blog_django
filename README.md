@@ -560,7 +560,7 @@ pipeline {
    			● Configure centralized logging for the Django application and Nginx using tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Azure Log Analytics.
    			● Ensure logs are easily accessible for troubleshooting
 
- ### In Progress...
+
 
 # 7. Backup and Restore:
 		● Database Backup:
