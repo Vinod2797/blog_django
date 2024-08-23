@@ -35,8 +35,8 @@ pipeline {
                         #    git pull origin main
                         #fi
 						
-						rm -rf ${PROJECT_DIR}
-						git clone ${GIT_REPO_URL} ${PROJECT_DIR}
+			rm -rf ${PROJECT_DIR}
+			git clone ${GIT_REPO_URL} ${PROJECT_DIR}
 						
                         """
                     }
