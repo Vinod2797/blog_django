@@ -559,7 +559,18 @@ pipeline {
 		 ● Logging:
    			● Configure centralized logging for the Django application and Nginx using tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Azure Log Analytics.
    			● Ensure logs are easily accessible for troubleshooting
+### Monitoring:
+- Set up monitoring for the application using Azure Monitor.
+- Configured alerts for critical thresholds to ensure proactive identification of performance issues.
+### Graphical view.
+  ![image](https://github.com/user-attachments/assets/12127867-796d-41c9-9275-4fcd93cfe51f)
 
+### Logging:
+- Configured centralized logging for the **Django** application using Azure Log Analytics.
+- Integrated application and server logs into a centralized platform for streamlined access and analysis.
+- Implemented log queries and dashboards in Azure to easily access logs and facilitate troubleshooting.
+### Grahical view.
+![image](https://github.com/user-attachments/assets/e5917003-4182-49ad-ac7d-b526f0645371)
 
 
 # 7. Backup and Restore:
