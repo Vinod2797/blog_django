@@ -381,7 +381,7 @@ The -k or --insecure flag with curl is used to bypass SSL verification, which is
 		Encrypt.
 		● Ensure that the application enforces HTTPS.
 
-
+we tried less encrypt but we don't have any DNS domain names. So, here logs for
 ### LOGS ####
 
 
