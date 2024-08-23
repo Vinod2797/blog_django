@@ -12,3 +12,5 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     GRANT ALL PRIVILEGES ON SCHEMA public TO dbadminuser;
 EOSQL
 
+echo "Executed successfully"
+
