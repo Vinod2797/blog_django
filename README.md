@@ -1,22 +1,14 @@
-# Blog - Django<br>![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+# Blog - Django
 
   ## Description
 
-  A personal Blog application built using Django (Python) and PostgreSQL. Admin users create Blog posts and site visitors can view posts, comment on posts, & save posts to read later.  PostgreSQL used for database storage. Deployed using AWS' Elastic Beanstalk.
+  A personal Blog application built using Django (Python) and PostgreSQL. Admin users create Blog posts and site visitors can view posts, comment on posts, & save posts to read later.  PostgreSQL used for database storage.
 
   
-  ## Table of Contents
-  
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [License](#license)
-  - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [Questions](#questions)
-  
+ 
   ## Installation
   
-  Deployed URL:  http://django-blog-env-1.eba-7pfn6c3t.us-east-2.elasticbeanstalk.com/
+  Deployed URL:  http://20.193.158.152/
   
   ## Usage
   
@@ -29,9 +21,3 @@
   
   ## Tests
   N/A
-
-  ## Questions
-  Contact Info<br>
-  GitHub user name: BillStephens2022<br>
-  Link to GitHub profile: https://github.com/BillStephens2022<br>
-  Email: stephensbill17@gmail.com
