@@ -6,6 +6,7 @@ QUIET=0
 HOST=""
 PORT=""
 
+echo "Test1"
 
 echoerr() { if [[ $QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
 
