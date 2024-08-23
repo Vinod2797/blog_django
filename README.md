@@ -24,28 +24,29 @@
 
 
 #================================================================
-
-1. Setup the Development Environment
-1.1 Install Dependencies:
+# 1. Setup the Development Environment
+## 1.1 Install Dependencies:
 
 Set up a local development environment on Ubuntu:
 
+```
 sudo apt update
 sudo apt upgrade
+```
 
 Install Python, Docker, and Docker Compose:
-
+```
 sudo apt install python3 python3-pip
 sudo apt install docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
 sudo apt install docker-compose
-
-1.2 Create a Django Project:
+```
+## 1.2 Create a Django Project:
 
 Initialize a Django project with a basic app:
-
+```
 mkdir django_project
 cd django_project
 python3 -m venv venv
