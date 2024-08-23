@@ -8,7 +8,7 @@
   
   ## Installation
   
-  Deployed URL:  hhttp://20.193.158.152/
+  Deployed URL:  http://20.193.158.152/
   
   ## Usage
   
