@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-    triggers {
-        // Poll SCM for changes
-        pollSCM('H/5 * * * *') // Check every 5 minutes; adjust as needed
-    }
+    #triggers {
+    #    // Poll SCM for changes
+    #    pollSCM('H/5 * * * *') // Check every 5 minutes; adjust as needed
+    #}
 
     environment {
         SSH_CREDENTIALS = credentials('azure-vm-ssh')
