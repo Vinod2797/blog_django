@@ -522,16 +522,16 @@ pipeline {
    			● Configure centralized logging for the Django application and Nginx using tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Azure Log Analytics.
    			● Ensure logs are easily accessible for troubleshooting
 
-In Progress...
+ ### In Progress...
 
 # 7. Backup and Restore:
 		● Database Backup:
 			● Set up a backup strategy for PostgreSQL using a tool like pg_dump or Azure Backup.
 			● Create a script to automate daily backups and store the securely.
-     		● Restore Process:
+   		● Restore Process:
 			● Document and test the process to restore the database from a backup.
 
- In Progress...
+ ### In Progress...
 
 
 
