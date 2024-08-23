@@ -410,12 +410,12 @@ sudo ufw enable
 		● Ensure that the pipeline can be triggered by a commit to the
 		main branch.
 
-## 5.1 Multibranch pipeline with webhook
+## 5.1: Multibranch pipeline with webhook
 ```http://15.207.104.237:8080/job/django-app-deploy-webhook/job/main/3/console```
 ## Webhook: 
 ```https://github.com/Vinod2797/blog_django/settings/hooks```
 
-## 5.2. Jenkinspipeline
+## 5.2: Jenkinspipeline
 ```
 pipeline {
     agent any
@@ -511,6 +511,6 @@ pipeline {
 }
 ```
 
-## Graphical View
+## Graphical view
 ![image](https://github.com/user-attachments/assets/184f788a-22f9-4ca8-90c2-7a6b7e27966e)
 
