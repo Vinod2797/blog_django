@@ -25,13 +25,13 @@
 
 #================================================================
 # 1. Setup the Development Environment
-## 1.1 Install Dependencies:
+## 1.1 Install Dependencies: (branch: release3)
 
 Set up a local development environment on Ubuntu:
 
 ```
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 ```
 
 Install Python, Docker, and Docker Compose:
@@ -48,13 +48,12 @@ sudo apt install docker-compose
 
 Initialize a Django project with a basic app:
 ```
-mkdir django_project
-cd django_project
+mkdir -p blog_django
+cd  blog_django
 python3 -m venv venv
 source venv/bin/activate
 pip install django psycopg2-binary
-django-admin startproject myproject .
-cd myproject
+django-admin startproject blog_django .
 django-admin startapp blog
 ```
 
@@ -64,9 +63,9 @@ Configure the project to use PostgreSQL as the database: Edit blog_django/webapp
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
+        'NAME': 'blogdb',
+        'USER': 'dbadminuser',
+        'PASSWORD': 'myP@ssw0rd',
         'HOST': 'db',
         'PORT': '5432',
     }
@@ -78,45 +77,81 @@ DATABASES = {
 
 Write a Dockerfile: Create a Dockerfile in the root of your project:
 ```
-FROM python:3.9-slim
+# Use the official Python image from the Docker Hub
+FROM python:3.12-slim
 
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# Set the working directory
 WORKDIR /app
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
+
+# Copy the requirements file
 COPY requirements.txt /app/
+
+# Install the dependencies
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+# Copy the rest of the application code
 COPY . /app/
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "myproject.wsgi:application"]
+# Make the wait-for-it.sh script executable
+RUN chmod +x /app/wait-for-it.sh
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Run the application
+CMD ["sh", "-c", "./wait-for-it.sh db:5432 -- gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application"]
 ```
 
 Create a docker-compose.yml file:
 ```
-version: '3'
+version: '3.8'
 
 services:
   db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: mydatabaseuser
-      POSTGRES_PASSWORD: mypassword
+    image: postgres:16
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: myP@ssw0rd
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
     build: .
-    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      gunicorn --bind 0.0.0.0:8000 blog_django.wsgi:application
+      "
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
-      - DATABASE_URL=postgres://mydatabaseuser:mypassword@db:5432/mydatabase
+      DATABASE_NAME: blogdb
+      DATABASE_USER: dbadminuser
+      DATABASE_PASSWORD: myP@ssw0rd
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      ALLOWED_HOSTS: '*'
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_EMAIL: admin@gmail.com
+      DJANGO_SUPERUSER_PASSWORD: Admin@123
 
   nginx:
     image: nginx:latest
@@ -124,6 +159,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./staticfiles:/app/staticfiles
+      - ./uploads:/app/uploads
     depends_on:
       - web
 
@@ -137,14 +174,25 @@ Ensure that the application can be started with a single command:
 
 ## 2.2 Database Configuration:
 
-Ensure that the Django application connects to the PostgreSQL container using environment variables: Edit myproject/settings.py to use environment variables:
+Ensure that the Django application connects to the PostgreSQL container using environment variables: Edit blog_django/settings.py to use environment variables:
 ```
 import os
-import dj_database_url
-
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blogdb',
+        'USER': 'dbadminuser',
+        'PASSWORD': 'myP@ssw0rd',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
 }
+```
+
+To make migrations and start the app:
+```
+python3 manage.py migrate
+python3 manage.py runserver 0.0.0.0:8000 &
 ```
 
 
@@ -168,6 +216,23 @@ Docker and Docker Compose installed on your machine.
 Nginx configured as a reverse proxy.
 Django application ready to be served.
 
+## Azure VM Setup
+Create and Configure an Ubuntu-based Azure VM:
+Follow the Azure documentation to create an Ubuntu VM: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal?tabs=ubuntu
+
+Install Docker and Docker Compose on the Azure VM:
+SSH into your Azure VM and run the following commands:
+```
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+## Deployment
 ## 3.1: Generate Self-Signed SSL Certificates
 First, you need to create SSL certificates to use for HTTPS:
 ```
