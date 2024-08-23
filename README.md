@@ -515,21 +515,21 @@ pipeline {
 ![image](https://github.com/user-attachments/assets/184f788a-22f9-4ca8-90c2-7a6b7e27966e)
 
 # 6. Monitoring and Logging:
-     ● Monitoring:
-	● Set up monitoring for the application using a tool like Prometheus and Grafana, or Azure Monitor.
-   	● Monitor key metrics such as CPU usage, memory usage, and response time.
-     ● Logging:
-   	● Configure centralized logging for the Django application and Nginx using tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Azure Log Analytics.
-   	● Ensure logs are easily accessible for troubleshooting
+		● Monitoring:
+			● Set up monitoring for the application using a tool like Prometheus and Grafana, or Azure Monitor.
+   			● Monitor key metrics such as CPU usage, memory usage, and response time.
+		 ● Logging:
+   			● Configure centralized logging for the Django application and Nginx using tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Azure Log Analytics.
+   			● Ensure logs are easily accessible for troubleshooting
 
 In Progress...
 
 # 7. Backup and Restore:
-     ● Database Backup:
-	● Set up a backup strategy for PostgreSQL using a tool like pg_dump or Azure Backup.
-	● Create a script to automate daily backups and store the securely.
-     ● Restore Process:
-	● Document and test the process to restore the database from a backup.
+		● Database Backup:
+			● Set up a backup strategy for PostgreSQL using a tool like pg_dump or Azure Backup.
+			● Create a script to automate daily backups and store the securely.
+     		● Restore Process:
+			● Document and test the process to restore the database from a backup.
 
  In Progress...
 
