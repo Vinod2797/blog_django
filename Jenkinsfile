@@ -20,7 +20,7 @@ pipeline {
 
     stages {
 	
-	    stage('Git Checkout') {
+	    stage('Git Checkout) {
             steps {
                 script {
                     sshagent(credentials: ['SSH_CREDENTIALS']) {
